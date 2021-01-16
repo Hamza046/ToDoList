@@ -6,7 +6,7 @@ app.use(bodyParser.urlencoded( {extended : true} ));
 app.use(express.static(__dirname + "/dosyalar"));
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
- 
+
                /* mongodb+srv://<username>:<password>@cluster0.tgkmo.mongodb.net/<dbname>?retryWrites=true&w=majority */
 mongoose.connect("mongodb+srv://hamza:1234@cluster0.tgkmo.mongodb.net/Cluster0?retryWrites=true&w=majority"  , {useNewUrlParser: true , useUnifiedTopology : true});
 
@@ -67,4 +67,10 @@ app.post("/sil", function(req, res){
         res.redirect("/");
     })
 });
-app.listen(5000);
+let port = process.env.PORT;
+if(port == "" || port == null){
+  port = 5000;
+}
+app.listen(port, function(){
+  console.log("port numarasi : " + port);
+});
